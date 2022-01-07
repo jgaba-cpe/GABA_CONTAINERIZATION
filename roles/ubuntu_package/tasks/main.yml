@@ -1,0 +1,28 @@
+---
+# tasks file for ubuntu_package
+
+- name: Add apt key
+  apt_key:
+    url: "{{ url }}"
+    state: present
+  when: url != ""
+
+- name: Add repository
+  apt_repository:
+    repo: "{{ repo }}"
+    filename: "{{ filename }}"
+    state: present
+  when: repo != ""
+
+- name: Install packages
+  apt:
+    name: "{{ package }}"
+    state: latest
+    update_cache: yes
+
+- name: Start and Enable service
+  service:
+    name: "{{ service }}"
+    state: started
+    enabled: yes
+  when: service != ""

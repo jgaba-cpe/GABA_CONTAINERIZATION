@@ -1,0 +1,6 @@
+---
+# tasks file for pip_install
+
+- name: Install python packages using pip
+  pip:
+    name: "{{ pippackage }}"
